@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FamilyList - Iniciar Sesion</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- Logo -->
+            <div class="auth-logo">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7,18c-1.1,0 -1.99,0.9 -1.99,2S5.9,22 7,22s2,-0.9 2,-2 -0.9,-2 -2,-2zM1,2v2h2l3.6,7.59 -1.35,2.45c-0.16,0.28 -0.25,0.61 -0.25,0.96 0,1.1 0.9,2 2,2h12v-2H7.42c-0.14,0 -0.25,-0.11 -0.25,-0.25l0.03,-0.12 0.9,-1.63h7.45c0.75,0 1.41,-0.41 1.75,-1.03l3.58,-6.49c0.08,-0.14 0.12,-0.31 0.12,-0.48 0,-0.55 -0.45,-1 -1,-1H5.21l-0.94,-2H1zM17,18c-1.1,0 -1.99,0.9 -1.99,2s0.89,2 1.99,2 2,-0.9 2,-2 -0.9,-2 -2,-2z"/>
+                </svg>
+            </div>
+
+            <h1 class="auth-title">FamilyList</h1>
+            <p class="auth-subtitle">Lista de compras familiar sincronizada</p>
+
+            <!-- Tabs Login/Registro -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Iniciar Sesion</button>
+                <button class="auth-tab" data-tab="registro">Registrarse</button>
+            </div>
+
+            <!-- Formulario Login -->
+            <form id="form-login" class="auth-form active">
+                <!-- Boton Google -->
+                <button type="button" id="btn-google-login" class="btn-google">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#4285F4" d="M22.56,12.25c0,-0.78 -0.07,-1.53 -0.2,-2.25H12v4.26h5.92c-0.26,1.37 -1.04,2.53 -2.21,3.31v2.77h3.57c2.08,-1.92 3.28,-4.74 3.28,-8.09z"/>
+                        <path fill="#34A853" d="M12,23c2.97,0 5.46,-0.98 7.28,-2.66l-3.57,-2.77c-0.98,0.66 -2.23,1.06 -3.71,1.06 -2.86,0 -5.29,-1.93 -6.16,-4.53H2.18v2.84C3.99,20.53 7.7,23 12,23z"/>
+                        <path fill="#FBBC05" d="M5.84,14.09c-0.22,-0.66 -0.35,-1.36 -0.35,-2.09s0.13,-1.43 0.35,-2.09V7.07H2.18C1.43,8.55 1,10.22 1,12s0.43,3.45 1.18,4.93l2.85,-2.22 0.81,-0.62z"/>
+                        <path fill="#EA4335" d="M12,5.38c1.62,0 3.06,0.56 4.21,1.64l3.15,-3.15C17.45,2.09 14.97,1 12,1 7.7,1 3.99,3.47 2.18,7.07l3.66,2.84c0.87,-2.6 3.3,-4.53 6.16,-4.53z"/>
+                    </svg>
+                    Continuar con Google
+                </button>
+
+                <div class="auth-divider">
+                    <span>o con tu correo</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-email">Correo electronico</label>
+                    <input type="email" id="login-email" required placeholder="tu@correo.com">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Contrasena</label>
+                    <input type="password" id="login-password" required placeholder="Tu contrasena">
+                </div>
+                <p id="login-error" class="error-message"></p>
+                <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+            </form>
+
+            <!-- Formulario Registro -->
+            <form id="form-registro" class="auth-form">
+                <!-- Boton Google -->
+                <button type="button" id="btn-google-registro" class="btn-google">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#4285F4" d="M22.56,12.25c0,-0.78 -0.07,-1.53 -0.2,-2.25H12v4.26h5.92c-0.26,1.37 -1.04,2.53 -2.21,3.31v2.77h3.57c2.08,-1.92 3.28,-4.74 3.28,-8.09z"/>
+                        <path fill="#34A853" d="M12,23c2.97,0 5.46,-0.98 7.28,-2.66l-3.57,-2.77c-0.98,0.66 -2.23,1.06 -3.71,1.06 -2.86,0 -5.29,-1.93 -6.16,-4.53H2.18v2.84C3.99,20.53 7.7,23 12,23z"/>
+                        <path fill="#FBBC05" d="M5.84,14.09c-0.22,-0.66 -0.35,-1.36 -0.35,-2.09s0.13,-1.43 0.35,-2.09V7.07H2.18C1.43,8.55 1,10.22 1,12s0.43,3.45 1.18,4.93l2.85,-2.22 0.81,-0.62z"/>
+                        <path fill="#EA4335" d="M12,5.38c1.62,0 3.06,0.56 4.21,1.64l3.15,-3.15C17.45,2.09 14.97,1 12,1 7.7,1 3.99,3.47 2.18,7.07l3.66,2.84c0.87,-2.6 3.3,-4.53 6.16,-4.53z"/>
+                    </svg>
+                    Registrarse con Google
+                </button>
+
+                <div class="auth-divider">
+                    <span>o con tu correo</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="registro-nombre">Nombre</label>
+                    <input type="text" id="registro-nombre" required placeholder="Tu nombre">
+                </div>
+                <div class="form-group">
+                    <label for="registro-email">Correo electronico</label>
+                    <input type="email" id="registro-email" required placeholder="tu@correo.com">
+                </div>
+                <div class="form-group">
+                    <label for="registro-password">Contrasena</label>
+                    <input type="password" id="registro-password" required placeholder="Minimo 6 caracteres">
+                </div>
+                <p id="registro-error" class="error-message"></p>
+                <button type="submit" class="btn btn-primary">Crear Cuenta</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Scripts del proyecto -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Manejo de tabs
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remover active de todos
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+
+                // Activar el seleccionado
+                tab.classList.add('active');
+                const formId = tab.dataset.tab === 'login' ? 'form-login' : 'form-registro';
+                document.getElementById(formId).classList.add('active');
+            });
+        });
+
+        // Formulario Login
+        document.getElementById('form-login').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const errorElement = document.getElementById('login-error');
+
+            errorElement.classList.remove('visible');
+
+            const resultado = await iniciarSesion(email, password);
+            if (!resultado.success) {
+                errorElement.textContent = resultado.error;
+                errorElement.classList.add('visible');
+            }
+        });
+
+        // Formulario Registro
+        document.getElementById('form-registro').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nombre = document.getElementById('registro-nombre').value;
+            const email = document.getElementById('registro-email').value;
+            const password = document.getElementById('registro-password').value;
+            const errorElement = document.getElementById('registro-error');
+
+            errorElement.classList.remove('visible');
+
+            const resultado = await registrarUsuario(email, password, nombre);
+            if (!resultado.success) {
+                errorElement.textContent = resultado.error;
+                errorElement.classList.add('visible');
+            }
+        });
+
+        // Google Sign In - Login
+        document.getElementById('btn-google-login').addEventListener('click', async () => {
+            const resultado = await iniciarSesionConGoogle();
+            if (!resultado.success) {
+                document.getElementById('login-error').textContent = resultado.error;
+                document.getElementById('login-error').classList.add('visible');
+            }
+        });
+
+        // Google Sign In - Registro
+        document.getElementById('btn-google-registro').addEventListener('click', async () => {
+            const resultado = await iniciarSesionConGoogle();
+            if (!resultado.success) {
+                document.getElementById('registro-error').textContent = resultado.error;
+                document.getElementById('registro-error').classList.add('visible');
+            }
+        });
+    </script>
+</body>
+</html>

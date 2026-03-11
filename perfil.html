@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FamilyList - Mi Perfil</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">FamilyList</div>
+            <nav class="nav-links">
+                <a href="lista.html">Lista</a>
+                <a href="perfil.html" class="active">Perfil</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="container">
+        <div class="perfil-header">
+            <div class="perfil-avatar" id="perfil-avatar">
+                <!-- Inicial del nombre -->
+            </div>
+            <h2 class="perfil-nombre" id="perfil-nombre">Cargando...</h2>
+            <p class="perfil-email" id="perfil-email">Cargando...</p>
+        </div>
+
+        <!-- Card Mi Familia -->
+        <div class="perfil-card" id="card-familia" style="display: none;">
+            <h3>Mi Familia</h3>
+            <p id="nombre-familia" style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;"></p>
+            <p id="miembros-familia" style="color: var(--text-secondary); font-size: 0.9rem;"></p>
+
+            <div class="perfil-info">
+                <span>Codigo para compartir</span>
+                <span id="codigo-familia" style="font-family: monospace; letter-spacing: 0.2em; color: var(--primary-color);"></span>
+            </div>
+            <button class="btn btn-primary" style="margin-top: 1rem;" onclick="copiarCodigo()">
+                Copiar Codigo
+            </button>
+        </div>
+
+        <!-- Card Acerca de -->
+        <div class="perfil-card">
+            <h3>Acerca de FamilyList</h3>
+            <p>Lista de compras familiar sincronizada en tiempo real. Comparte tu lista con toda la familia y manten todo organizado desde cualquier dispositivo.</p>
+            <div class="perfil-info">
+                <span>Version</span>
+                <span>1.0.0</span>
+            </div>
+        </div>
+
+        <button class="btn btn-danger" style="width: 100%; margin-top: 1rem;" onclick="cerrarSesion()">
+            Cerrar Sesion
+        </button>
+    </main>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Scripts del proyecto -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Cargar datos del perfil cuando el usuario este autenticado
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                // Usar funcion robusta para obtener el nombre
+                const nombreUsuario = await obtenerNombreUsuarioRobusto();
+                const email = user.email || '';
+
+                document.getElementById('perfil-nombre').textContent = nombreUsuario;
+                document.getElementById('perfil-email').textContent = email;
+                document.getElementById('perfil-avatar').textContent = nombreUsuario.charAt(0).toUpperCase();
+
+                // Cargar datos de familia
+                await cargarDatosFamilia(user.uid);
+            }
+        });
+
+        async function cargarDatosFamilia(uid) {
+            try {
+                // Obtener familiaId del usuario
+                const userDoc = await db.collection('usuarios').doc(uid).get();
+                if (!userDoc.exists) return;
+
+                const familiaId = userDoc.data().familiaId;
+                if (!familiaId) return;
+
+                // Obtener datos de la familia
+                const familiaDoc = await db.collection('familias').doc(familiaId).get();
+                if (!familiaDoc.exists) return;
+
+                const familia = familiaDoc.data();
+
+                // Mostrar datos
+                document.getElementById('card-familia').style.display = 'block';
+                document.getElementById('nombre-familia').textContent = familia.nombre;
+                document.getElementById('codigo-familia').textContent = familia.codigo;
+                document.getElementById('miembros-familia').textContent = `${familia.miembros.length} miembro(s)`;
+            } catch (error) {
+                console.error('Error cargando datos de familia:', error);
+            }
+        }
+
+        function copiarCodigo() {
+            const codigo = document.getElementById('codigo-familia').textContent;
+            navigator.clipboard.writeText(codigo).then(() => {
+                // Mostrar mensaje de exito
+                const btn = event.target;
+                const textoOriginal = btn.textContent;
+                btn.textContent = 'Copiado!';
+                setTimeout(() => {
+                    btn.textContent = textoOriginal;
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

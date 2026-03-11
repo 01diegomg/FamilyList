@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FamilyList - Lista de Compras</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">FamilyList</div>
+            <nav class="nav-links">
+                <a href="lista.html" class="active">Lista</a>
+                <a href="perfil.html">Perfil</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="container">
+        <div class="lista-header">
+            <h1 class="lista-titulo">Lista de Compras</h1>
+            <div class="filtro-container">
+                <label for="filtro-categoria">Filtrar:</label>
+                <select id="filtro-categoria">
+                    <option value="todas">Todas las categorias</option>
+                    <option value="Lacteos">Lacteos</option>
+                    <option value="Verduras">Verduras</option>
+                    <option value="Carnes">Carnes</option>
+                    <option value="Limpieza">Limpieza</option>
+                    <option value="Otros">Otros</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Lista de productos -->
+        <div id="lista-productos">
+            <div class="lista-vacia">
+                <p>Cargando lista...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Boton flotante agregar -->
+    <button id="btn-agregar" class="btn-flotante" title="Agregar producto">+</button>
+
+    <!-- Modal Agregar/Editar Producto -->
+    <div id="modal-producto" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-titulo">Agregar Producto</h2>
+                <button class="modal-close" onclick="cerrarModal()">&times;</button>
+            </div>
+            <form id="form-producto">
+                <div class="form-group">
+                    <label for="input-nombre">Nombre del producto</label>
+                    <input type="text" id="input-nombre" required placeholder="Ej: Leche, Pan, Jabon">
+                </div>
+                <div class="form-group">
+                    <label for="input-cantidad">Cantidad</label>
+                    <input type="number" id="input-cantidad" required min="1" value="1">
+                </div>
+                <div class="form-group">
+                    <label for="input-unidad">Unidad</label>
+                    <select id="input-unidad" required>
+                        <option value="Unidades">Unidades</option>
+                        <option value="Kilogramos">Kilogramos</option>
+                        <option value="Gramos">Gramos</option>
+                        <option value="Litros">Litros</option>
+                        <option value="Mililitros">Mililitros</option>
+                        <option value="Docena">Docena</option>
+                        <option value="Paquete">Paquete</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="input-categoria">Categoria</label>
+                    <select id="input-categoria" required>
+                        <option value="">Selecciona una categoria</option>
+                        <option value="Lacteos">Lacteos</option>
+                        <option value="Verduras">Verduras</option>
+                        <option value="Carnes">Carnes</option>
+                        <option value="Limpieza">Limpieza</option>
+                        <option value="Otros">Otros</option>
+                    </select>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Scripts del proyecto -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/lista.js"></script>
+</body>
+</html>
